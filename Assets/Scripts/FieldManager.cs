@@ -23,7 +23,15 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private int _outs;
     [SerializeField] private int _strikes;
     [SerializeField] private int _balls;
-    [SerializeField] private GameObject FirstBaseman;
+    [SerializeField] private GameObject _firstBaseman;
+    [SerializeField] private GameObject _secondBaseman;
+    [SerializeField] private GameObject _thirdBaseman;
+    [SerializeField] private GameObject _shortstop;
+    [SerializeField] private GameObject _pitcher;
+    [SerializeField] private GameObject _catcher;
+    [SerializeField] private GameObject _leftField;
+    [SerializeField] private GameObject _centerField;
+    [SerializeField] private GameObject _rightField;
 
     private void Awake() {
         if (Instance == null) {
@@ -34,11 +42,19 @@ public class FieldManager : MonoBehaviour {
         }
     }
     void Start() {
-        setFirstBaseman();
+        setDefense();
     }
 
-    private void setFirstBaseman() {
-        Instantiate(_whosOnFirst, FirstBaseman.transform.position, Quaternion.identity);
+    private void setDefense() {
+        Instantiate(_activeFirstBase, _firstBaseman.transform.position, Quaternion.identity);
+        Instantiate(_activeSecondBase, _secondBaseman.transform.position, Quaternion.identity);
+        Instantiate(_activeThirdBase, _thirdBaseman.transform.position, Quaternion.identity);
+        Instantiate(_activeShortstop, _shortstop.transform.position, Quaternion.identity);
+        Instantiate(_activePitcher, _pitcher.transform.position, Quaternion.identity);
+        Instantiate(_activeCatcher, _catcher.transform.position, Quaternion.identity);
+        Instantiate(_activeLeftField, _leftField.transform.position, Quaternion.identity);
+        Instantiate(_activeCenterField, _centerField.transform.position, Quaternion.identity);
+        Instantiate(_activeRightField, _rightField.transform.position, Quaternion.identity);
     }
 }
 
