@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FieldManager : MonoBehaviour {
@@ -22,7 +23,7 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private int _outs;
     [SerializeField] private int _strikes;
     [SerializeField] private int _balls;
-    
+    [SerializeField] private GameObject FirstBaseman;
 
     private void Awake() {
         if (Instance == null) {
@@ -32,4 +33,13 @@ public class FieldManager : MonoBehaviour {
             Destroy(gameObject); 
         }
     }
+    void Start() {
+        setFirstBaseman();
+    }
+
+    private void setFirstBaseman() {
+        Instantiate(_whosOnFirst, FirstBaseman.transform.position, Quaternion.identity);
+    }
 }
+
+
