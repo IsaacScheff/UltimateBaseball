@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class UIManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+using TMPro; 
+public class UIManager : MonoBehaviour {
+    public static UIManager Instance { get; private set; }
+    public TextMeshProUGUI InfoText; // Assign in inspector
+    public GameObject InfoPanel; // The panel to show/hide
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); 
+        } else if (Instance != this) {
+            Destroy(gameObject); 
+        }
+        InfoPanel.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void OnMouseOverCharacter(string characterInfo) {
+        InfoText.text = characterInfo;
+        InfoPanel.SetActive(true);
+    }
+    public void OnMouseExitCharacter() {
+        InfoPanel.SetActive(false);
     }
 }

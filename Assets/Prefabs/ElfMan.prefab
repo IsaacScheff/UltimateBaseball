@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5426729242870037256}
   - component: {fileID: 5496847225143251145}
   - component: {fileID: -4708419270891043554}
+  - component: {fileID: 7503050549434211458}
   m_Layer: 0
   m_Name: ElfMan
   m_TagString: Untagged
@@ -105,3 +106,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &7503050549434211458
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442752990344774954}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.14
