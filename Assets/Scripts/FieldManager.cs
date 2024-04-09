@@ -32,6 +32,10 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private GameObject _leftField;
     [SerializeField] private GameObject _centerField;
     [SerializeField] private GameObject _rightField;
+    [SerializeField] private GameObject _batting;
+    [SerializeField] private GameObject _firstBase;
+    [SerializeField] private GameObject _secondBase;
+    [SerializeField] private GameObject _thirdBase;
 
     private void Awake() {
         if (Instance == null) {
@@ -43,6 +47,7 @@ public class FieldManager : MonoBehaviour {
     }
     void Start() {
         setDefense();
+        setOffense();
     }
 
     private void setDefense() {
@@ -55,6 +60,19 @@ public class FieldManager : MonoBehaviour {
         Instantiate(_activeLeftField, _leftField.transform.position, Quaternion.identity);
         Instantiate(_activeCenterField, _centerField.transform.position, Quaternion.identity);
         Instantiate(_activeRightField, _rightField.transform.position, Quaternion.identity);
+    }
+
+    private void setOffense() {
+        Instantiate(_batter, _batting.transform.position, Quaternion.identity);
+        if (_whosOnFirst != null) {
+        Instantiate(_whosOnFirst, _firstBase.transform.position, Quaternion.identity);
+        }
+        if (_whosOnSecond != null) {
+            Instantiate(_whosOnSecond, _secondBase.transform.position, Quaternion.identity);
+        }
+        if (_whosOnThird != null) {
+            Instantiate(_whosOnThird, _thirdBase.transform.position, Quaternion.identity);
+        }
     }
 }
 
