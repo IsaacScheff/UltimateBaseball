@@ -11,10 +11,24 @@ public class BaseAthlete : MonoBehaviour {
     [SerializeField] private int _baseCatching;
     [SerializeField] private int _baseFielding;
     [SerializeField] private int _baseStamina;
-    public string placeholder = "placeholder stat";
+    public string StatBlock;
+    void Start() {
+        StatBlock = $"Health: {_baseHealth}\n";
+        StatBlock += $"Stamina: {_baseStamina}\n";
+        StatBlock += $"Speed: {_baseSpeed}\n";
+        StatBlock += $"Bat Accuracy: {_baseBatAccuracy}\n";
+        StatBlock += $"Bat Power: {_baseBatPower}\n";
+        StatBlock += $"Pitching: {_basePitching}\n";
+        StatBlock += $"Catching: {_baseCatching}\n";
+        StatBlock += $"Fielding: {_baseFielding}\n";
+    }
     private void OnMouseEnter() {
         // Show the info panel and update the text
-        UIManager.Instance.InfoText.text = placeholder;
+        UIManager.Instance.InfoText.text = StatBlock;
         UIManager.Instance.InfoPanel.SetActive(true);
+    }
+    private void OnMouseExit() {
+        // Hide the info panel
+        UIManager.Instance.InfoPanel.SetActive(false);
     }
 }
