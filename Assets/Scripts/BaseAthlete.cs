@@ -24,11 +24,11 @@ public class BaseAthlete : MonoBehaviour {
     }
     private void OnMouseEnter() {
         // Show the info panel and update the text
-        UIManager.Instance.InfoText.text = StatBlock;
-        UIManager.Instance.InfoPanel.SetActive(true);
+        UIManager.Instance.PlayerInfoText.text = StatBlock;
+        UIManager.Instance.PlayerInfoPanel.SetActive(true);
     }
     private void OnMouseExit() {
         // Hide the info panel
-        UIManager.Instance.InfoPanel.SetActive(false);
+        UIManager.Instance.PlayerInfoPanel.SetActive(false);
     }
 }

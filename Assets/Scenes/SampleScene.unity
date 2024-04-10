@@ -286,10 +286,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6824822daa637471db8affdb1bec4d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfoText: {fileID: 1731292859}
-  InfoPanel: {fileID: 1320225527}
+  PlayerInfoText: {fileID: 1731292859}
+  PlayerInfoPanel: {fileID: 1320225527}
   ButtonPrefab: {fileID: 23536283551842693, guid: 66c288bc7ef294d539812c720a97777f, type: 3}
   ButtonPanel: {fileID: 1024841703}
+  GameInfoText: {fileID: 944621289}
 --- !u!4 &91070505
 Transform:
   m_ObjectHideFlags: 0
@@ -763,7 +764,7 @@ GameObject:
   - component: {fileID: 944621290}
   - component: {fileID: 944621289}
   m_Layer: 5
-  m_Name: InGameResults
+  m_Name: GameInfoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -903,7 +904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1024841703
 RectTransform:
   m_ObjectHideFlags: 0
@@ -921,8 +922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -410}
-  m_SizeDelta: {x: 0, y: -853.7273}
+  m_AnchoredPosition: {x: 0.36602783, y: -410}
+  m_SizeDelta: {x: -49.396, y: -853.7273}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1024841704
 MonoBehaviour:
@@ -1160,7 +1161,7 @@ GameObject:
   - component: {fileID: 1320225530}
   - component: {fileID: 1320225529}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PlayerInfoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1336,7 +1337,7 @@ GameObject:
   - component: {fileID: 1731292860}
   - component: {fileID: 1731292859}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PlayerInfoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

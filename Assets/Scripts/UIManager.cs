@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using TMPro; 
 public class UIManager : MonoBehaviour {
     public static UIManager Instance { get; private set; }
-    public TextMeshProUGUI InfoText; 
-    public GameObject InfoPanel; 
+    public TextMeshProUGUI PlayerInfoText; 
+    public GameObject PlayerInfoPanel; 
     public Button ButtonPrefab;
-    public Transform ButtonPanel; 
+    public Transform ButtonPanel;
+    public TextMeshProUGUI GameInfoText; 
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -16,13 +17,30 @@ public class UIManager : MonoBehaviour {
         } else if (Instance != this) {
             Destroy(gameObject); 
         }
-        InfoPanel.SetActive(false);
+        PlayerInfoPanel.SetActive(false);
+        PlayBall();
     }
     public void OnMouseOverCharacter(string characterInfo) {
-        InfoText.text = characterInfo;
-        InfoPanel.SetActive(true);
+        PlayerInfoText.text = characterInfo;
+        PlayerInfoPanel.SetActive(true);
     }
     public void OnMouseExitCharacter() {
-        InfoPanel.SetActive(false);
+        PlayerInfoPanel.SetActive(false);
+    }
+    public void PlayBall() {
+        GameInfoText.text = "Play Ball!";
+        Button playBallButton = Instantiate(ButtonPrefab, ButtonPanel);
+        playBallButton.transform.localPosition = Vector3.zero;
+        playBallButton.GetComponentInChildren<TextMeshProUGUI>().text = "Play Ball!";
+        playBallButton.onClick.AddListener(_playBallClicked);
+    }
+    private void _playBallClicked() {
+        Debug.Log("Let the game begin!");
+        DestroyButtons();
+    }
+    public void DestroyButtons() {
+        foreach (Transform child in ButtonPanel) {
+            Destroy(child.gameObject);
+        }
     }
 }
