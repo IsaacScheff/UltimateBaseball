@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro; 
 public class UIManager : MonoBehaviour {
     public static UIManager Instance { get; private set; }
-    public TextMeshProUGUI InfoText; // Assign in inspector
-    public GameObject InfoPanel; // The panel to show/hide
+    public TextMeshProUGUI InfoText; 
+    public GameObject InfoPanel; 
+    public Button ButtonPrefab;
+    public Transform ButtonPanel; 
     private void Awake() {
         if (Instance == null) {
             Instance = this;
