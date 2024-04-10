@@ -45,12 +45,20 @@ public class FieldManager : MonoBehaviour {
             Destroy(gameObject); 
         }
     }
-    void Start() {
-        setDefense();
-        setOffense();
-    }
+    public void SetDefense() {
+        BaseAthlete[] lineup = _playerBatting ? TeamManager.Instance.ComputerLineUp : TeamManager.Instance.PlayerLineUp;
+    
+        // Assuming the lineup array is 0-indexed and the first 9 are the positions needed
+        _activePitcher = lineup[0];
+        _activeCatcher = lineup[1];
+        _activeFirstBase = lineup[2];
+        _activeSecondBase = lineup[3];
+        _activeThirdBase = lineup[4];
+        _activeShortstop = lineup[5];
+        _activeLeftField = lineup[6];
+        _activeCenterField = lineup[7];
+        _activeRightField = lineup[8];
 
-    private void setDefense() {
         Instantiate(_activeFirstBase, _firstBaseman.transform.position, Quaternion.identity);
         Instantiate(_activeSecondBase, _secondBaseman.transform.position, Quaternion.identity);
         Instantiate(_activeThirdBase, _thirdBaseman.transform.position, Quaternion.identity);
@@ -62,10 +70,12 @@ public class FieldManager : MonoBehaviour {
         Instantiate(_activeRightField, _rightField.transform.position, Quaternion.identity);
     }
 
-    private void setOffense() {
-        Instantiate(_batter, _batting.transform.position, Quaternion.identity);
+    public void SetOffense() {
+        if (_batter != null) {
+            Instantiate(_batter, _batting.transform.position, Quaternion.identity);
+        }
         if (_whosOnFirst != null) {
-        Instantiate(_whosOnFirst, _firstBase.transform.position, Quaternion.identity);
+            Instantiate(_whosOnFirst, _firstBase.transform.position, Quaternion.identity);
         }
         if (_whosOnSecond != null) {
             Instantiate(_whosOnSecond, _secondBase.transform.position, Quaternion.identity);
