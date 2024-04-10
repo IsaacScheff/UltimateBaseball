@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour {
     public static FieldManager Instance { get; private set; }
+    public StateOfPlay stateOfPlay;
     [SerializeField] private BaseAthlete _activePitcher;
     [SerializeField] private BaseAthlete _activeCatcher;
     [SerializeField] private BaseAthlete _activeFirstBase;
@@ -14,15 +15,19 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private BaseAthlete _activeLeftField;
     [SerializeField] private BaseAthlete _activeCenterField;
     [SerializeField] private BaseAthlete _activeRightField;
-    [SerializeField] private BaseAthlete _batter;
+    [SerializeField] private BaseAthlete _activeBatter;
     [SerializeField] private BaseAthlete _whosOnFirst;
     [SerializeField] private BaseAthlete _whosOnSecond;
     [SerializeField] private BaseAthlete _whosOnThird;
     [SerializeField] private bool _playerBatting;
-    [SerializeField] private int _inning;
+    [SerializeField] private int _inningNumber;
+    [SerializeField] private bool _topOfInning = true;
+    [SerializeField] private bool _playerHomeTeam; //true if player is the home team
     [SerializeField] private int _outs;
     [SerializeField] private int _strikes;
     [SerializeField] private int _balls;
+    [SerializeField] private int _playerChaAtBat = 0;
+    [SerializeField] private int _computerChaAtBat = 0;
     [SerializeField] private GameObject _firstBaseman;
     [SerializeField] private GameObject _secondBaseman;
     [SerializeField] private GameObject _thirdBaseman;
@@ -36,7 +41,6 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private GameObject _firstBase;
     [SerializeField] private GameObject _secondBase;
     [SerializeField] private GameObject _thirdBase;
-
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -44,6 +48,20 @@ public class FieldManager : MonoBehaviour {
         } else if (Instance != this) {
             Destroy(gameObject); 
         }
+    }
+    void Start() {
+        StartGame();
+    }
+    private void StartGame() {
+        _inningNumber = 1;
+        if(_playerHomeTeam){
+            _playerBatting = false;
+            ChangeStateOfPlay(StateOfPlay.ComputerBatting);
+        } else {
+            _playerBatting = true;
+            ChangeStateOfPlay(StateOfPlay.PlayerBatting);
+        }
+        SetDefense();
     }
     public void SetDefense() {
         BaseAthlete[] lineup = _playerBatting ? TeamManager.Instance.ComputerLineUp : TeamManager.Instance.PlayerLineUp;
@@ -71,8 +89,8 @@ public class FieldManager : MonoBehaviour {
     }
 
     public void SetOffense() {
-        if (_batter != null) {
-            Instantiate(_batter, _batting.transform.position, Quaternion.identity);
+        if (_activeBatter != null) {
+            Instantiate(_activeBatter, _batting.transform.position, Quaternion.identity);
         }
         if (_whosOnFirst != null) {
             Instantiate(_whosOnFirst, _firstBase.transform.position, Quaternion.identity);
@@ -83,6 +101,31 @@ public class FieldManager : MonoBehaviour {
         if (_whosOnThird != null) {
             Instantiate(_whosOnThird, _thirdBase.transform.position, Quaternion.identity);
         }
+    }
+    public void ChangeStateOfPlay(StateOfPlay newState) {
+        stateOfPlay = newState;
+        switch(newState) {
+            case StateOfPlay.PlayerBatting:
+                _activeBatter = TeamManager.Instance.PlayerLineUp[_playerChaAtBat];
+                _playerChaAtBat++; //maybe should change this after hit/out instead of here
+                SetOffense();
+                break;
+            case StateOfPlay.ComputerBatting:
+                _activeBatter = TeamManager.Instance.ComputerLineUp[_computerChaAtBat];
+                _computerChaAtBat++; //maybe should change this after hit/out instead of here
+                SetOffense();
+                break;
+            case StateOfPlay.PlayerRunning:
+                break;
+            case StateOfPlay.ComputerRunning:
+                break;
+        }
+    }
+    public enum StateOfPlay {
+        PlayerBatting,
+        ComputerBatting,
+        PlayerRunning,
+        ComputerRunning
     }
 }
 

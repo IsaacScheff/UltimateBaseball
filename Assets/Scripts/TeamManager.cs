@@ -25,7 +25,7 @@ public class TeamManager : MonoBehaviour {
     }
 
     void Start() {
-        FieldManager.Instance.SetOffense();
-        FieldManager.Instance.SetDefense();
+        //FieldManager.Instance.SetOffense();
+        //FieldManager.Instance.SetDefense();
     }
 }
