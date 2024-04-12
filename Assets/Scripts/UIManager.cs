@@ -49,17 +49,35 @@ public class UIManager : MonoBehaviour {
         Button SmashButton = Instantiate(ButtonPrefab, ButtonPanel);
         SmashButton.GetComponentInChildren<TextMeshProUGUI>().text = "Smash!";
         SmashButton.onClick.AddListener(delegate {BatOptionSelect(BattingManager.BatOption.Smash); });
+
         Button DriveButton = Instantiate(ButtonPrefab, ButtonPanel);
         DriveButton.GetComponentInChildren<TextMeshProUGUI>().text = "Drive";
+        DriveButton.onClick.AddListener(delegate {BatOptionSelect(BattingManager.BatOption.Drive); });
+
         Button BuntButton = Instantiate(ButtonPrefab, ButtonPanel);
         BuntButton.GetComponentInChildren<TextMeshProUGUI>().text = "Bunt";
+        BuntButton.onClick.AddListener(delegate {BatOptionSelect(BattingManager.BatOption.Bunt); });
     }
     public void ShowDirectionSelect() {
-        Debug.Log("Show direction options");
+        Button RightButton = Instantiate(ButtonPrefab, ButtonPanel);
+        RightButton.GetComponentInChildren<TextMeshProUGUI>().text = "Right";
+        RightButton.onClick.AddListener(delegate {DirectionAimSelect(BattingManager.BatDirection.Right); });
+
+        Button CenterButton = Instantiate(ButtonPrefab, ButtonPanel);
+        CenterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Center";
+        CenterButton.onClick.AddListener(delegate {DirectionAimSelect(BattingManager.BatDirection.Center); });
+        
+        Button LeftButton = Instantiate(ButtonPrefab, ButtonPanel);
+        LeftButton.GetComponentInChildren<TextMeshProUGUI>().text = "Left";
+        LeftButton.onClick.AddListener(delegate {DirectionAimSelect(BattingManager.BatDirection.Left); });
     }
-    public void BatOptionSelect(BattingManager.BatOption BatOption) {
-        BattingManager.Instance.BatOptionPick = BatOption;
+    public void BatOptionSelect(BattingManager.BatOption batOption) {
+        BattingManager.Instance.BatOptionPick = batOption;
         DestroyButtons();
         ShowDirectionSelect();
+    }
+    public void DirectionAimSelect(BattingManager.BatDirection directionAimed) {
+        BattingManager.Instance.DirectionAimed = directionAimed;
+        DestroyButtons();
     }
 }

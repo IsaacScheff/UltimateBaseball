@@ -685,9 +685,7 @@ MonoBehaviour:
   _whosOnSecond: {fileID: 0}
   _whosOnThird: {fileID: 0}
   _playerBatting: 0
-  _inningNumber: 0
-  _topOfInning: 0
-  _playerHomeTeam: 1
+  _playerHomeTeam: 0
   _outs: 0
   _strikes: 0
   _balls: 0

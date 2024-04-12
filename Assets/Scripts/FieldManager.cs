@@ -20,8 +20,8 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private BaseAthlete _whosOnSecond;
     [SerializeField] private BaseAthlete _whosOnThird;
     [SerializeField] private bool _playerBatting;
-    [SerializeField] private int _inningNumber;
-    [SerializeField] private bool _topOfInning = true;
+    //[SerializeField] private int _inningNumber;
+    //[SerializeField] private bool _topOfInning = true;
     [SerializeField] private bool _playerHomeTeam; //true if player is the home team
     [SerializeField] private int _outs;
     [SerializeField] private int _strikes;
@@ -53,7 +53,7 @@ public class FieldManager : MonoBehaviour {
         StartGame();
     }
     private void StartGame() {
-        _inningNumber = 1;
+        //_inningNumber = 1;
         if(_playerHomeTeam){
             _playerBatting = false;
             ChangeStateOfPlay(StateOfPlay.ComputerBatting);

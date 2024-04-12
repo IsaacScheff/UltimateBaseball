@@ -6,6 +6,7 @@ public class BattingManager : MonoBehaviour {
     //handles game logic during batting phase
     public static BattingManager Instance { get; private set; }
     public BatOption BatOptionPick;
+    public BatDirection DirectionAimed;
       private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -25,5 +26,11 @@ public class BattingManager : MonoBehaviour {
         Smash,
         Drive,
         Bunt
+    }
+
+    public enum BatDirection {
+        Right,
+        Center,
+        Left
     }
 }
