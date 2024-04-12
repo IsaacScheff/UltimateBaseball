@@ -46,14 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d995566d309fc499db2b120a39806070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseHealth: 0
-  _baseSpeed: 0
-  _baseBatAccuracy: 0
-  _baseBatPower: 0
-  _basePitching: 0
-  _baseCatching: 0
-  _baseFielding: 0
-  _baseStamina: 0
+  _baseHealth: 6
+  _baseSpeed: 5
+  _baseBatAccuracy: 5
+  _baseBatPower: 5
+  _basePitching: 5
+  _baseCatching: 5
+  _baseFielding: 5
+  _baseStamina: 5
   StatBlock: 
 --- !u!212 &-4708419270891043554
 SpriteRenderer:

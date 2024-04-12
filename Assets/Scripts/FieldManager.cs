@@ -19,6 +19,19 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private BaseAthlete _whosOnFirst;
     [SerializeField] private BaseAthlete _whosOnSecond;
     [SerializeField] private BaseAthlete _whosOnThird;
+    public BaseAthlete ActivePitcher { get { return _activePitcher; } }
+    public BaseAthlete ActiveCatcher { get { return _activeCatcher; } }
+    public BaseAthlete ActiveFirstBase { get { return _activeFirstBase; } }
+    public BaseAthlete ActiveSecondBase { get { return _activeSecondBase; } }
+    public BaseAthlete ActiveThirdBase { get { return _activeThirdBase; } }
+    public BaseAthlete ActiveShortstop { get { return _activeShortstop; } }
+    public BaseAthlete ActiveLeftField { get { return _activeLeftField; } }
+    public BaseAthlete ActiveCenterField { get { return _activeCenterField; } }
+    public BaseAthlete ActiveRightField { get { return _activeRightField; } }
+    public BaseAthlete ActiveBatter { get { return _activeBatter; } }
+    public BaseAthlete WhosOnFirst { get { return _whosOnFirst; } }
+    public BaseAthlete WhosOnSecond { get { return _whosOnSecond; } }
+    public BaseAthlete WhosOnThird { get { return _whosOnThird; } }
     [SerializeField] private bool _playerBatting;
     //[SerializeField] private int _inningNumber;
     //[SerializeField] private bool _topOfInning = true;
@@ -26,6 +39,10 @@ public class FieldManager : MonoBehaviour {
     [SerializeField] private int _outs;
     [SerializeField] private int _strikes;
     [SerializeField] private int _balls;
+    [SerializeField] private int _homeScore;
+    [SerializeField] private int _awayScore;
+    public int HomeScore { get { return _homeScore;} }
+    public int AwayScore { get { return _awayScore;} }
     [SerializeField] private int _playerChaAtBat = 0;
     [SerializeField] private int _computerChaAtBat = 0;
     [SerializeField] private GameObject _firstBaseman;
@@ -121,6 +138,44 @@ public class FieldManager : MonoBehaviour {
                 break;
         }
     }
+    // public void WalkBatter(){ //batter goes to first
+    //     if(_whosOnFirst == null) {
+    //         _whosOnFirst = _activeBatter;
+    //     } else if(_whosOnSecond == null) {
+    //             _whosOnSecond = _whosOnFirst;
+    //             _whosOnFirst = _activeBatter;
+    //     } else if(_whosOnThird == null ) {
+    //         _whosOnThird = _whosOnSecond;
+    //         _whosOnSecond = _whosOnFirst;
+    //         _whosOnFirst = _activeBatter;
+    //     } else {
+    //         _whosOnThird = _whosOnSecond;
+    //         _whosOnSecond = _whosOnFirst;
+    //         _whosOnFirst = _activeBatter;
+    //         //check for home team or away
+    //         if(_whosOnThird != null)
+    //             _homeScore++;
+    //     }
+    // } 
+    public void WalkBatter(){ //batter goes to first
+        if(_whosOnFirst != null) {
+            if(_whosOnSecond == null) {
+                _whosOnSecond = _whosOnFirst;
+            } else {
+                if(_whosOnThird != null)
+                    _homeScore++; //later will check for which team
+                _whosOnThird = _whosOnSecond;
+                _whosOnSecond = _whosOnFirst;
+            } 
+        }
+        _whosOnFirst = _activeBatter;
+        if(_playerChaAtBat < 13) //TODO: replace these with an increment batting order function
+            _playerChaAtBat++;
+        else
+            _playerChaAtBat = 0;
+        _activeBatter = TeamManager.Instance.PlayerLineUp[_playerChaAtBat];
+        SetOffense();
+    } 
     public enum StateOfPlay {
         PlayerBatting,
         ComputerBatting,

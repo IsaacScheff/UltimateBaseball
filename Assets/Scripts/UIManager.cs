@@ -79,5 +79,7 @@ public class UIManager : MonoBehaviour {
     public void DirectionAimSelect(BattingManager.BatDirection directionAimed) {
         BattingManager.Instance.DirectionAimed = directionAimed;
         DestroyButtons();
+
+        BattingManager.Instance.CalculateHit(FieldManager.Instance.ActivePitcher, FieldManager.Instance.ActiveBatter);
     }
 }

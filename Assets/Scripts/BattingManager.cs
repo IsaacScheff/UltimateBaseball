@@ -15,6 +15,19 @@ public class BattingManager : MonoBehaviour {
             Destroy(gameObject); 
         }
     }
+    //private int d6Roll = Random.Range (1, 7);
+    public void CalculateHit(BaseAthlete pitcher, BaseAthlete batter) {
+        int rollOne = Random.Range (1, 7);
+        int rollTwo = Random.Range (1, 7);
+        int totalRoll = rollOne + rollTwo;
+        Debug.Log($"Rolled: {rollOne} and {rollTwo} for a total of {totalRoll}");
+        totalRoll = totalRoll + pitcher.BasePitching - batter.BaseBatAccuracy;
+        Debug.Log($"with stats: {totalRoll}");
+        if(totalRoll > 7) { //a hit later in development will result in change to run mode, for now just give the base
+            FieldManager.Instance.WalkBatter();
+        }
+        UIManager.Instance.ShowBatterOptions();
+    }
     public void PlayerBatter(BaseAthlete batter, BaseAthlete pitcher) {
 
     }
