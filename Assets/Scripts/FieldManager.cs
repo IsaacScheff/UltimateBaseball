@@ -33,14 +33,19 @@ public class FieldManager : MonoBehaviour {
     public BaseAthlete WhosOnSecond { get { return _whosOnSecond; } }
     public BaseAthlete WhosOnThird { get { return _whosOnThird; } }
     [SerializeField] private bool _playerBatting;
-    //[SerializeField] private int _inningNumber;
-    //[SerializeField] private bool _topOfInning = true;
+    [SerializeField] private int _inningNumber = 1;
+    [SerializeField] private bool _topOfInning = true;
+    public int InningNumber { get { return _inningNumber; } }
+    public bool TopOfInning { get { return _topOfInning; } }
     [SerializeField] private bool _playerHomeTeam; //true if player is the home team
     [SerializeField] private int _outs;
     [SerializeField] private int _strikes;
     [SerializeField] private int _balls;
-    [SerializeField] private int _homeScore;
-    [SerializeField] private int _awayScore;
+    [SerializeField] private int _homeScore = 0;
+    [SerializeField] private int _awayScore = 0;
+    public int Outs{ get { return _outs; } }
+    public int Strikes { get { return _strikes; } }
+    public int Balls { get { return _balls; } }
     public int HomeScore { get { return _homeScore;} }
     public int AwayScore { get { return _awayScore;} }
     [SerializeField] private int _playerChaAtBat = 0;
@@ -70,7 +75,7 @@ public class FieldManager : MonoBehaviour {
         StartGame();
     }
     private void StartGame() {
-        //_inningNumber = 1;
+        _inningNumber = 1;
         if(_playerHomeTeam){
             _playerBatting = false;
             ChangeStateOfPlay(StateOfPlay.ComputerBatting);
@@ -79,6 +84,7 @@ public class FieldManager : MonoBehaviour {
             ChangeStateOfPlay(StateOfPlay.PlayerBatting);
         }
         SetDefense();
+        UIManager.Instance.SetScoreboardText();
     }
     public void SetDefense() {
         BaseAthlete[] lineup = _playerBatting ? TeamManager.Instance.ComputerLineUp : TeamManager.Instance.PlayerLineUp;
@@ -138,32 +144,15 @@ public class FieldManager : MonoBehaviour {
                 break;
         }
     }
-    // public void WalkBatter(){ //batter goes to first
-    //     if(_whosOnFirst == null) {
-    //         _whosOnFirst = _activeBatter;
-    //     } else if(_whosOnSecond == null) {
-    //             _whosOnSecond = _whosOnFirst;
-    //             _whosOnFirst = _activeBatter;
-    //     } else if(_whosOnThird == null ) {
-    //         _whosOnThird = _whosOnSecond;
-    //         _whosOnSecond = _whosOnFirst;
-    //         _whosOnFirst = _activeBatter;
-    //     } else {
-    //         _whosOnThird = _whosOnSecond;
-    //         _whosOnSecond = _whosOnFirst;
-    //         _whosOnFirst = _activeBatter;
-    //         //check for home team or away
-    //         if(_whosOnThird != null)
-    //             _homeScore++;
-    //     }
-    // } 
     public void WalkBatter(){ //batter goes to first
         if(_whosOnFirst != null) {
             if(_whosOnSecond == null) {
                 _whosOnSecond = _whosOnFirst;
             } else {
-                if(_whosOnThird != null)
+                if(_whosOnThird != null){
                     _homeScore++; //later will check for which team
+                    UIManager.Instance.SetScoreboardText(); //TODO: create event/listneer system for changing scoreboar numbers that trigger this function automatically
+                }
                 _whosOnThird = _whosOnSecond;
                 _whosOnSecond = _whosOnFirst;
             } 

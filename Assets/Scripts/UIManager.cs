@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour {
     public Button ButtonPrefab;
     public Transform ButtonPanel;
     public TextMeshProUGUI GameInfoText; 
+    public GameObject ScoreboardPanel;
+    public TextMeshProUGUI ScoreboardText;
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -30,6 +32,7 @@ public class UIManager : MonoBehaviour {
     }
     public void PlayBall() {
         GameInfoText.text = "Play Ball!";
+        //SetScoreboardText();
         Button playBallButton = Instantiate(ButtonPrefab, ButtonPanel);
         playBallButton.GetComponentInChildren<TextMeshProUGUI>().text = "Play Ball!";
         playBallButton.onClick.AddListener(_playBallClicked);
@@ -81,5 +84,11 @@ public class UIManager : MonoBehaviour {
         DestroyButtons();
 
         BattingManager.Instance.CalculateHit(FieldManager.Instance.ActivePitcher, FieldManager.Instance.ActiveBatter);
+    }
+
+    public void SetScoreboardText() {
+        ScoreboardText.text = $"Home: {FieldManager.Instance.HomeScore}  -  Visitors: {FieldManager.Instance.AwayScore}\n\n";
+        ScoreboardText.text += $"Inning: {(FieldManager.Instance.TopOfInning ? "T" : "B")}{FieldManager.Instance.InningNumber}\n\n";
+        ScoreboardText.text += $"Ball: {FieldManager.Instance.Balls} Strike: {FieldManager.Instance.Strikes} Out: {FieldManager.Instance.Outs}";
     }
 }
